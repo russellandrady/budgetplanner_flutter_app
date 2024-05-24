@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Register extends StatelessWidget {
+  const Register({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,16 +45,20 @@ class Login extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Padding(
                   padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: Text(
-                    "Login",
+                    "Register",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                   ),
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Enter Username"),
                 ),
                 const TextField(
                   decoration: InputDecoration(
@@ -70,7 +74,7 @@ class Login extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: const Text(
-                    "Login",
+                    "Register",
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w300,
@@ -79,13 +83,13 @@ class Login extends StatelessWidget {
                 ),
                 InkWell(
                   child: const Text(
-                    'Register here',
+                    'Login here',
                     style: TextStyle(
                         color: Colors.blue,
                         decoration: TextDecoration.underline),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/register');
+                    Navigator.pushNamed(context, '/login');
                   },
                 )
               ],
