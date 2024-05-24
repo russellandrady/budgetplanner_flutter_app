@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: WelcomePage(),
       theme: ThemeData(
-          primaryColor: Color(0xFFFFA686),
-          primaryColorLight: Color(0xFFFEC196),
-          primaryColorDark: Color(0xFFD6A184)),
+          primaryColor: Color(0xFFA3A6CC),
+          primaryColorLight: Color(0xFFEEF36A),
+          primaryColorDark: Color(0xFF7D82B8)),
       routes: {'/login': (context) => Login()},
     );
   }
