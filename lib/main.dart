@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       home: WelcomePage(),
       theme: ThemeData(
           primaryColor: Color(0xFFA3A6CC),
-          primaryColorLight: Color(0xFFEEF36A),
+          primaryColorLight: Color(0xFFE7E7E7),
           primaryColorDark: Color(0xFF7D82B8)),
       routes: {
         '/login': (context) => Login(),

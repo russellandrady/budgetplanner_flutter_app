@@ -9,7 +9,7 @@ class Budgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(),
+      appBar: CustomAppbar(showLogoutuButton: true,),
       drawer: LeftMenu(),
       body: Center(
           child: Text(
