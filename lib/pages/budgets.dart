@@ -1,3 +1,6 @@
+import 'package:budgetplanner/utils/appbar.dart';
+import 'package:budgetplanner/utils/left_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Budgets extends StatelessWidget {
@@ -6,7 +9,11 @@ class Budgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Budget")),
+      appBar: CustomAppbar(),
+      drawer: LeftMenu(),
+      body: Center(
+          child: Text(
+              "Hello " + FirebaseAuth.instance.currentUser!.email!.toString())),
     );
   }
 }

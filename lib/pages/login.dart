@@ -1,7 +1,10 @@
+import 'package:budgetplanner/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  Login({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +59,24 @@ class Login extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                   ),
                 ),
-                const TextField(
+                TextField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: "Enter Email"),
                 ),
-                const TextField(
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: "Password"),
                 ),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await AuthService().signin(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                        context: context);
+                  },
                   color: Theme.of(context).primaryColorDark,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),

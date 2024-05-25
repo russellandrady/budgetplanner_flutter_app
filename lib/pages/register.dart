@@ -74,6 +74,7 @@ class Register extends StatelessWidget {
                 MaterialButton(
                   onPressed: () async {
                     await AuthService().signup(
+                        context: context,
                         email: _emailController.text,
                         password: _passwordController.text);
                   },
