@@ -10,7 +10,6 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorLight,
       appBar: CustomAppbar(showLogoutuButton: false),
       drawer: LeftMenu(),
       body: Center(
