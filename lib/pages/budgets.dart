@@ -36,6 +36,7 @@ class _BudgetsState extends State<Budgets> {
               });
               _budgetName.clear();
               _budgetAmount.clear();
+              Navigator.pop(context);
             },
           );
         });
@@ -53,8 +54,14 @@ class _BudgetsState extends State<Budgets> {
           itemCount: budgetList.length,
           itemBuilder: (context, index) {
             return BudgetTile(
-                budgetName: budgetList[index][0],
-                budgetAmount: budgetList[index][1]);
+              budgetName: budgetList[index][0],
+              budgetAmount: budgetList[index][1],
+              onDelete: (context) {
+                setState(() {
+                  budgetList.removeAt(index);
+                });
+              },
+            );
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(

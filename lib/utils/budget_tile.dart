@@ -1,16 +1,33 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class BudgetTile extends StatelessWidget {
   String budgetName;
   int budgetAmount;
-  BudgetTile({super.key, required this.budgetName, required this.budgetAmount});
+  Function(BuildContext)? onDelete;
+  BudgetTile(
+      {super.key,
+      required this.budgetName,
+      required this.budgetAmount,
+      required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
       child: Slidable(
+        endActionPane: ActionPane(
+          motion: StretchMotion(),
+          children: [
+            SlidableAction(
+              onPressed: onDelete,
+              icon: Icons.delete,
+              backgroundColor: Theme.of(context).primaryColorDark,
+              borderRadius: BorderRadius.circular(25),
+            )
+          ],
+        ),
         child: Column(
           children: [
             Center(

@@ -4,7 +4,11 @@ class PopoupBox extends StatelessWidget {
   final budgetName;
   final budgetAmount;
   VoidCallback onSave;
-  PopoupBox({super.key, required this.onSave, required this.budgetName,required this.budgetAmount});
+  PopoupBox(
+      {super.key,
+      required this.onSave,
+      required this.budgetName,
+      required this.budgetAmount});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +21,14 @@ class PopoupBox extends StatelessWidget {
           children: [
             TextField(
               controller: budgetName,
-              decoration: InputDecoration(hintText: "Ex: To by a car"),
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                hintText: "Ex: To by a car",
+              ),
             ),
             TextField(
               controller: budgetAmount,
+              textAlign: TextAlign.center,
               decoration: InputDecoration(hintText: "Ex: 50"),
             ),
             MaterialButton(
