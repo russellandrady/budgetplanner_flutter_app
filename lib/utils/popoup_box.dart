@@ -13,9 +13,9 @@ class PopoupBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).primaryColorLight,
       content: Container(
         height: 180,
+        width: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -31,17 +31,20 @@ class PopoupBox extends StatelessWidget {
               textAlign: TextAlign.center,
               decoration: InputDecoration(hintText: "Ex: 50"),
             ),
-            MaterialButton(
-              onPressed: onSave,
-              color: Theme.of(context).primaryColorDark,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: const Text(
-                "Add",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: MaterialButton(
+                onPressed: onSave,
+                color: Theme.of(context).primaryColorLight,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: const Text(
+                  "ADD",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black),
+                ),
               ),
             )
           ],
