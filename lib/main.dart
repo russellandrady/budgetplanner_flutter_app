@@ -22,9 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: WelcomePage(),
       theme: ThemeData(
-          primaryColor: Color(0xFFA3A6CC),
+          primaryColor: Color(0xFF04724D),
           primaryColorLight: Color(0xFFE7E7E7),
-          primaryColorDark: Color(0xFFF2D0A9)),
+          primaryColorDark: Color(0xFFF2D0A9),
+          highlightColor: Colors.white),
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => Register(),
