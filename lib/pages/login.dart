@@ -50,11 +50,13 @@ class Login extends StatelessWidget {
                 TextfieldsRegular(
                     fieldController: _emailController,
                     textHint: "Email",
-                    fieldColor: Theme.of(context).highlightColor),
+                    fieldColor: Theme.of(context).highlightColor,
+                    hideText: false,),
                 TextfieldsRegular(
                     fieldController: _passwordController,
                     textHint: "Password",
-                    fieldColor: Theme.of(context).highlightColor),
+                    fieldColor: Theme.of(context).highlightColor,
+                    hideText: true,),
                 ButtonsRegular(
                   name: "LOGIN",
                   onSave: () async {

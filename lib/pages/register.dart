@@ -1,6 +1,8 @@
 import 'package:budgetplanner/services/auth_service.dart';
 import 'package:budgetplanner/utils/appbar.dart';
+import 'package:budgetplanner/utils/buttons_regular.dart';
 import 'package:budgetplanner/utils/left_menu.dart';
+import 'package:budgetplanner/utils/textfields_regular.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatelessWidget {
@@ -11,73 +13,69 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
-        showLogoutuButton: false,
-      ),
+      appBar: CustomAppbar(showLogoutuButton: false),
       drawer: LeftMenu(),
       body: Center(
         child: Container(
           height: 400.0,
           width: 400.0,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 3,
-                blurRadius: 9,
-                offset: Offset(0, 3),
-              ),
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.grey.withOpacity(0.4),
+            //     spreadRadius: 3,
+            //     blurRadius: 9,
+            //     offset: Offset(0, 3),
+            //   ),
+            // ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Padding(
                   padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: Text(
-                    "Register",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                    "USER REGISTER",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.white),
                   ),
                 ),
-                TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Enter Email"),
+                TextfieldsRegular(
+                  fieldController: _emailController,
+                  textHint: "Email",
+                  fieldColor: Theme.of(context).highlightColor,
+                  hideText: false,
                 ),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Password"),
+                TextfieldsRegular(
+                  fieldController: _passwordController,
+                  textHint: "Password",
+                  fieldColor: Theme.of(context).highlightColor,
+                  hideText: true,
                 ),
-                MaterialButton(
-                  onPressed: () async {
+                ButtonsRegular(
+                  name: "REGISTER",
+                  onSave: () async {
                     await AuthService().signup(
                         context: context,
                         email: _emailController.text,
                         password: _passwordController.text);
                   },
-                  color: Theme.of(context).primaryColorDark,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Text(
-                    "Register",
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white),
-                  ),
+                  buttonColor: Theme.of(context).highlightColor,
                 ),
                 InkWell(
                   child: const Text(
                     'Login here',
                     style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline),
+                      color: Colors.white,
+                    ),
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, '/login');

@@ -1,4 +1,5 @@
 import 'package:budgetplanner/utils/buttons_regular.dart';
+import 'package:budgetplanner/utils/textfields_regular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -21,34 +22,16 @@ class PopoupBox extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextField(
-              controller: budgetName,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                hintText: "Ex: To By a Car",
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15), // Rounded corners
-                  borderSide: BorderSide(
-                    // Change to your desired border color
-                    width: 2.0, // Change to your desired border width
-                  ),
-                ),
-              ),
-            ),
-            TextField(
-              controller: budgetAmount,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                hintText: "Ex: 50",
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15), // Rounded corners
-                  borderSide: BorderSide(
-                    // Change to your desired border color
-                    width: 2.0, // Change to your desired border width
-                  ),
-                ),
-              ),
-            ),
+            TextfieldsRegular(
+                fieldController: budgetName,
+                textHint: "Ex:To Get Dinner",
+                fieldColor: Colors.black,
+                hideText: false),
+            TextfieldsRegular(
+                fieldController: budgetAmount,
+                textHint: "Ex:50",
+                fieldColor: Colors.black,
+                hideText: false),
             ButtonsRegular(
               name: 'ADD NEW TASK',
               onSave: onSave,

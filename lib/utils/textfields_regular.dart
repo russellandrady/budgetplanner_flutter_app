@@ -5,13 +5,20 @@ class TextfieldsRegular extends StatelessWidget {
   final fieldController;
   final String textHint;
   final Color fieldColor;
-  TextfieldsRegular({super.key, required this.fieldController, required this.textHint, required this.fieldColor});
+  final bool hideText;
+  TextfieldsRegular(
+      {super.key,
+      required this.fieldController,
+      required this.textHint,
+      required this.fieldColor,
+      required this.hideText});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: fieldController,
       textAlign: TextAlign.center,
+      obscureText: hideText,
       style: TextStyle(color: fieldColor),
       decoration: InputDecoration(
         hintText: textHint,
