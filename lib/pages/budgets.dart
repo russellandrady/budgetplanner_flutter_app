@@ -1,8 +1,10 @@
+import 'package:budgetplanner/services/cloud_service.dart';
 import 'package:budgetplanner/utils/appbar.dart';
 import 'package:budgetplanner/utils/budget_tile.dart';
 import 'package:budgetplanner/utils/left_menu.dart';
 import 'package:budgetplanner/utils/popoup_box.dart';
 import 'package:budgetplanner/utils/total_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +18,25 @@ class Budgets extends StatefulWidget {
 }
 
 class _BudgetsState extends State<Budgets> {
+  @override
+  void initState() {
+    loadBudgets();
+    // TODO: implement initState
+    super.initState();
+  }
+
   final _budgetName = TextEditingController();
   final _budgetAmount = TextEditingController();
-  List budgetList = [
-    ["Buy a hammer", 50],
-    ["Buy a face mask", 25],
-    ["Buy a bag", 100],
-  ];
+  List budgetList = [];
+
+  void loadBudgets() async {
+    List<List<dynamic>> fetchedBudgets =
+        await FireStoreService().getAllBudgets();
+    // Now you have the fetched budgets, you can assign them to budgetList or use them as needed
+    setState(() {
+      budgetList = fetchedBudgets;
+    });
+  }
 
   void createNewBudget() {
     showDialog(
@@ -32,13 +46,19 @@ class _BudgetsState extends State<Budgets> {
             budgetName: _budgetName,
             budgetAmount: _budgetAmount,
             onSave: () {
-              setState(() {
-                budgetList
-                    .add([_budgetName.text, int.parse(_budgetAmount.text)]);
-              });
+              // setState(() {
+              //   budgetList
+              //       .add([_budgetName.text, int.parse(_budgetAmount.text)]);
+              // });
+
+              FireStoreService().createUserDocument(
+                  budgetName: _budgetName.text,
+                  budgetAmount: _budgetAmount.text);
+              loadBudgets();
               _budgetName.clear();
               _budgetAmount.clear();
               Navigator.pop(context);
+              print(budgetList);
             },
           );
         });
