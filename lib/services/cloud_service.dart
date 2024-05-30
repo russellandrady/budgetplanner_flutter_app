@@ -74,6 +74,7 @@ class FireStoreService {
           .collection('users')
           .doc(user.uid)
           .collection('budgets')
+          .orderBy('value')
           .get();
 
       querySnapshot.docs.forEach((doc) {
@@ -81,9 +82,10 @@ class FireStoreService {
         Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
 
         if (data != null) {
+          String id = doc.id;
           String? name = data["name"] as String?;
           int? value = data["value"] as int?;
-          budgetList.insert(0, [name, value]);
+          budgetList.add([id, name, value]);
         }
       });
 
@@ -93,4 +95,25 @@ class FireStoreService {
       return budgetList;
     }
   }
+  Future<void> deleteBudget(String budgetId) async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    DocumentReference budgetRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('budgets')
+        .doc(budgetId); // Assuming budgetId is the ID of the budget document to delete
+
+    try {
+      await budgetRef.delete();
+      print('Budget deleted successfully!');
+    } catch (e) {
+      print('Error deleting budget: $e');
+      // Handle error as needed
+    }
+  } else {
+    print('User is not authenticated!');
+  }
+}
+
 }

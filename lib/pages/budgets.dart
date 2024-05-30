@@ -67,7 +67,7 @@ class _BudgetsState extends State<Budgets> {
   @override
   Widget build(BuildContext context) {
     int calculateTotal(budgetList) {
-      return budgetList.fold(0, (sum, item) => sum + item[1]);
+      return budgetList.fold(0, (sum, item) => sum + item[2]);
     }
 
     return Scaffold(
@@ -87,11 +87,13 @@ class _BudgetsState extends State<Budgets> {
           } else {
             // Render the budget tile
             return BudgetTile(
-              budgetName: budgetList[index][0],
-              budgetAmount: budgetList[index][1],
+              budgetName: budgetList[index][1],
+              budgetAmount: budgetList[index][2],
               onDelete: (context) {
                 setState(() {
-                  budgetList.removeAt(index);
+                  FireStoreService().deleteBudget(budgetList[index][0]);
+                  loadBudgets();
+                  // budgetList.removeAt(index);
                 });
               },
             );
