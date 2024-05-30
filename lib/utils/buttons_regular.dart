@@ -6,7 +6,13 @@ class ButtonsRegular extends StatelessWidget {
   final VoidCallback onSave;
   final String name;
   final Color buttonColor;
-  ButtonsRegular({super.key, required this.name, required this.onSave, required this.buttonColor});
+  final bool loading;
+  ButtonsRegular(
+      {super.key,
+      required this.name,
+      required this.onSave,
+      required this.buttonColor,
+      required this.loading});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +27,21 @@ class ButtonsRegular extends StatelessWidget {
           shape: RoundedRectangleBorder(
               side: BorderSide(width: 2.0),
               borderRadius: BorderRadius.circular(15)),
-          child: Text(
-            name,
-            style: const TextStyle(
-                fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black),
-          ),
+          child: !loading
+              ? Text(
+                  name,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black),
+                )
+              : const SizedBox(
+                  width: 20, // Adjust width as needed
+                  height: 20, // Adjust height as needed
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                  ),
+                ),
         ),
       ),
     );

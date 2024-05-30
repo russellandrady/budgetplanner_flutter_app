@@ -19,25 +19,29 @@ class PopoupBox extends StatelessWidget {
       content: Container(
         height: 220,
         width: 300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextfieldsRegular(
-                fieldController: budgetName,
-                textHint: "Ex:To Get Dinner",
-                fieldColor: Colors.black,
-                hideText: false),
-            TextfieldsRegular(
-                fieldController: budgetAmount,
-                textHint: "Ex:50",
-                fieldColor: Colors.black,
-                hideText: false),
-            ButtonsRegular(
-              name: 'ADD NEW TASK',
-              onSave: onSave,
-              buttonColor: Theme.of(context).primaryColorDark,
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 14.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextfieldsRegular(
+                  fieldController: budgetName,
+                  textHint: "Ex:To Get Dinner",
+                  fieldColor: Colors.black,
+                  hideText: false),
+              TextfieldsRegular(
+                  fieldController: budgetAmount,
+                  textHint: "Ex:50",
+                  fieldColor: Colors.black,
+                  hideText: false),
+              ButtonsRegular(
+                name: 'ADD NEW TASK',
+                onSave: onSave,
+                buttonColor: Theme.of(context).primaryColorDark,
+                loading: false,
+              )
+            ],
+          ),
         ),
       ),
     );

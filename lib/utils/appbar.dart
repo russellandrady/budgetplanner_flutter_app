@@ -9,6 +9,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
+      iconTheme: IconThemeData(color: Theme.of(context).highlightColor),
       title: const Center(),
       actions: showLogoutuButton
           ? [

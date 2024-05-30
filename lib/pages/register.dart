@@ -5,11 +5,20 @@ import 'package:budgetplanner/utils/left_menu.dart';
 import 'package:budgetplanner/utils/textfields_regular.dart';
 import 'package:flutter/material.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
   final _emailController = TextEditingController();
+
   final _passwordController = TextEditingController();
 
-  Register({super.key});
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,12 +72,19 @@ class Register extends StatelessWidget {
                 ButtonsRegular(
                   name: "REGISTER",
                   onSave: () async {
+                    setState(() {
+                      loading = true;
+                    });
                     await AuthService().signup(
                         context: context,
                         email: _emailController.text,
                         password: _passwordController.text);
+                    setState(() {
+                      loading = false;
+                    });
                   },
                   buttonColor: Theme.of(context).highlightColor,
+                  loading: loading,
                 ),
                 InkWell(
                   child: const Text(

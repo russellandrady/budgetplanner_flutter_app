@@ -12,16 +12,9 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     super.initState();
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      Future.delayed(Duration(seconds: 1), () {
-        Navigator.pushNamed(context, '/budgets');
-      });
-    } else {
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pushNamed(context, '/login');
       });
-    }
   }
 
   @override

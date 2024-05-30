@@ -3,6 +3,7 @@ import 'package:budgetplanner/pages/budgets.dart';
 import 'package:budgetplanner/pages/login.dart';
 import 'package:budgetplanner/pages/register.dart';
 import 'package:budgetplanner/pages/welcome_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home:
+          FirebaseAuth.instance.currentUser != null ? Budgets() : WelcomePage(),
       theme: ThemeData(
           primaryColor: Color(0xFF04724D),
           primaryColorLight: Color(0xFFE7E7E7),
