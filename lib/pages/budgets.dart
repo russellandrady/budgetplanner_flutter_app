@@ -1,6 +1,7 @@
 import 'package:budgetplanner/services/cloud_service.dart';
 import 'package:budgetplanner/utils/appbar.dart';
 import 'package:budgetplanner/utils/budget_tile.dart';
+import 'package:budgetplanner/utils/fake_tile_builder.dart';
 import 'package:budgetplanner/utils/left_menu.dart';
 import 'package:budgetplanner/utils/popoup_box.dart';
 import 'package:budgetplanner/utils/total_tile.dart';
@@ -23,9 +24,15 @@ class _BudgetsState extends State<Budgets> {
   bool loadingPop = false;
   @override
   void initState() {
-    loadBudgets();
     // TODO: implement initState
     super.initState();
+    setState(() {
+      loading = true;
+    });
+    loadBudgets();
+    setState(() {
+      loading = false;
+    });
   }
 
   final _budgetName = TextEditingController();
@@ -33,15 +40,11 @@ class _BudgetsState extends State<Budgets> {
   List budgetList = [];
 
   void loadBudgets() async {
-    setState(() {
-      loading = true;
-    });
     List<List<dynamic>> fetchedBudgets =
         await FireStoreService().getAllBudgets();
     // Now you have the fetched budgets, you can assign them to budgetList or use them as needed
     setState(() {
       budgetList = fetchedBudgets;
-      loading = false;
     });
   }
 
@@ -87,32 +90,21 @@ class _BudgetsState extends State<Budgets> {
         showLogoutuButton: true,
       ),
       drawer: const LeftMenu(),
-      body: ListView.builder(
-        padding: EdgeInsets.all(8.0),
-        itemCount: budgetList.length +
-            1, // Increase itemCount by 1 to add the total tile
-        itemBuilder: (context, index) {
-          if (index == budgetList.length) {
-            // Render the total tile
-            return TotalTile(
-                budgetName: "Total", budgetAmount: calculateTotal(budgetList));
-          } else {
-            // Render the budget tile
-            return loading
-                ? Shimmer.fromColors(
-                    baseColor: Theme.of(context).primaryColorDark,
-                    highlightColor: Theme.of(context).primaryColorLight,
-                    child: BudgetTile(
-                      budgetName: budgetList[index][1],
-                      budgetAmount: budgetList[index][2],
-                      onDelete: (context) {
-                        FireStoreService().deleteBudget(budgetList[index][0]);
-                        loadBudgets();
-                        // budgetList.removeAt(index);
-                      },
-                    ),
-                  )
-                : BudgetTile(
+      body: loading
+          ? FakeTileBuilder()
+          : ListView.builder(
+              padding: EdgeInsets.all(8.0),
+              itemCount: budgetList.length +
+                  1, // Increase itemCount by 1 to add the total tile
+              itemBuilder: (context, index) {
+                if (index == budgetList.length) {
+                  // Render the total tile
+                  return TotalTile(
+                      budgetName: "Total",
+                      budgetAmount: calculateTotal(budgetList));
+                } else {
+                  // Render the budget tile
+                  return BudgetTile(
                     budgetName: budgetList[index][1],
                     budgetAmount: budgetList[index][2],
                     onDelete: (context) {
@@ -121,9 +113,9 @@ class _BudgetsState extends State<Budgets> {
                       // budgetList.removeAt(index);
                     },
                   );
-          }
-        },
-      ),
+                }
+              },
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: createNewBudget,

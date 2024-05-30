@@ -28,16 +28,16 @@ class PopoupBox extends StatelessWidget {
             children: [
               TextfieldsRegular(
                   fieldController: budgetName,
-                  textHint: "Ex:To Get Dinner",
+                  textHint: "Task",
                   fieldColor: Colors.black,
                   hideText: false),
               TextfieldsRegular(
                   fieldController: budgetAmount,
-                  textHint: "Ex:50",
+                  textHint: "Budget",
                   fieldColor: Colors.black,
                   hideText: false),
               ButtonsRegular(
-                name: 'ADD NEW TASK',
+                name: 'ADD',
                 onSave: onSave,
                 buttonColor: Theme.of(context).primaryColorDark,
                 loading: loading,
