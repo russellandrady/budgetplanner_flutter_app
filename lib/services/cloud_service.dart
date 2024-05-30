@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:budgetplanner/utils/toast_alert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,23 +19,23 @@ class FireStoreService {
           // User document exists, update the budgets field
           userDocument
               .set({'budgets': budgetList}, SetOptions(merge: true)).then((_) {
-            print('Budgets added successfully!');
+            ToastAlert().toastAlert(message: "Added!");
           }).catchError((error) {
-            print('Failed to add budgets: $error');
+            ToastAlert().toastAlert(message: "Error!");
           });
         } else {
           // User document doesn't exist, create it and set the budgets field
           userDocument.set({'budgets': budgetList}).then((_) {
-            print('User document created with budgets!');
+            ToastAlert().toastAlert(message: "Added!");
           }).catchError((error) {
-            print('Failed to create user document: $error');
+            ToastAlert().toastAlert(message: "Error!");
           });
         }
       }).catchError((error) {
-        print('Error checking user document: $error');
+        ToastAlert().toastAlert(message: "Error!");
       });
     } else {
-      print('User is not authenticated!');
+      ToastAlert().toastAlert(message: "User is Not Authenticated!");
     }
   }
 
@@ -56,12 +57,12 @@ class FireStoreService {
           "value": amount,
         });
 
-        print('Budget added successfully!');
+        ToastAlert().toastAlert(message: "Added");
       } catch (e) {
-        print('Error parsing budgetAmount: $e');
+        ToastAlert().toastAlert(message: "Error!");
       }
     } else {
-      print('User is not authenticated!');
+      ToastAlert().toastAlert(message: "User is Not Authenticated!");
     }
   }
 
@@ -91,29 +92,30 @@ class FireStoreService {
 
       return budgetList;
     } else {
-      print('User is not authenticated!');
+      ToastAlert().toastAlert(message: "User is Not Authenticated!");
       return budgetList;
     }
   }
+
   Future<void> deleteBudget(String budgetId) async {
-  User? user = FirebaseAuth.instance.currentUser;
-  if (user != null) {
-    DocumentReference budgetRef = FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .collection('budgets')
-        .doc(budgetId); // Assuming budgetId is the ID of the budget document to delete
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentReference budgetRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('budgets')
+          .doc(
+              budgetId); // Assuming budgetId is the ID of the budget document to delete
 
-    try {
-      await budgetRef.delete();
-      print('Budget deleted successfully!');
-    } catch (e) {
-      print('Error deleting budget: $e');
-      // Handle error as needed
+      try {
+        await budgetRef.delete();
+        ToastAlert().toastAlert(message: "Deleted");
+      } catch (e) {
+        ToastAlert().toastAlert(message: "Error");
+        // Handle error as needed
+      }
+    } else {
+      ToastAlert().toastAlert(message: "User is Not Authenticated!");
     }
-  } else {
-    print('User is not authenticated!');
   }
-}
-
 }

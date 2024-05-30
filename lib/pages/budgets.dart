@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Budgets extends StatefulWidget {
   Budgets({super.key});
@@ -18,6 +19,8 @@ class Budgets extends StatefulWidget {
 }
 
 class _BudgetsState extends State<Budgets> {
+  bool loading = false;
+  bool loadingPop = false;
   @override
   void initState() {
     loadBudgets();
@@ -30,11 +33,15 @@ class _BudgetsState extends State<Budgets> {
   List budgetList = [];
 
   void loadBudgets() async {
+    setState(() {
+      loading = true;
+    });
     List<List<dynamic>> fetchedBudgets =
         await FireStoreService().getAllBudgets();
     // Now you have the fetched budgets, you can assign them to budgetList or use them as needed
     setState(() {
       budgetList = fetchedBudgets;
+      loading = false;
     });
   }
 
@@ -50,7 +57,9 @@ class _BudgetsState extends State<Budgets> {
               //   budgetList
               //       .add([_budgetName.text, int.parse(_budgetAmount.text)]);
               // });
-
+              setState(() {
+                loadingPop = true;
+              });
               FireStoreService().createUserDocument(
                   budgetName: _budgetName.text,
                   budgetAmount: _budgetAmount.text);
@@ -58,8 +67,11 @@ class _BudgetsState extends State<Budgets> {
               _budgetName.clear();
               _budgetAmount.clear();
               Navigator.pop(context);
-              print(budgetList);
+              setState(() {
+                loadingPop = false;
+              });
             },
+            loading: loadingPop,
           );
         });
   }
@@ -86,17 +98,29 @@ class _BudgetsState extends State<Budgets> {
                 budgetName: "Total", budgetAmount: calculateTotal(budgetList));
           } else {
             // Render the budget tile
-            return BudgetTile(
-              budgetName: budgetList[index][1],
-              budgetAmount: budgetList[index][2],
-              onDelete: (context) {
-                setState(() {
-                  FireStoreService().deleteBudget(budgetList[index][0]);
-                  loadBudgets();
-                  // budgetList.removeAt(index);
-                });
-              },
-            );
+            return loading
+                ? Shimmer.fromColors(
+                    baseColor: Theme.of(context).primaryColorDark,
+                    highlightColor: Theme.of(context).primaryColorLight,
+                    child: BudgetTile(
+                      budgetName: budgetList[index][1],
+                      budgetAmount: budgetList[index][2],
+                      onDelete: (context) {
+                        FireStoreService().deleteBudget(budgetList[index][0]);
+                        loadBudgets();
+                        // budgetList.removeAt(index);
+                      },
+                    ),
+                  )
+                : BudgetTile(
+                    budgetName: budgetList[index][1],
+                    budgetAmount: budgetList[index][2],
+                    onDelete: (context) {
+                      FireStoreService().deleteBudget(budgetList[index][0]);
+                      loadBudgets();
+                      // budgetList.removeAt(index);
+                    },
+                  );
           }
         },
       ),

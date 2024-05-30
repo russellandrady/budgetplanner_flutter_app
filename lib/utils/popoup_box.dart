@@ -6,12 +6,14 @@ import 'package:flutter/widgets.dart';
 class PopoupBox extends StatelessWidget {
   final budgetName;
   final budgetAmount;
+  final loading;
   VoidCallback onSave;
   PopoupBox(
       {super.key,
       required this.onSave,
       required this.budgetName,
-      required this.budgetAmount});
+      required this.budgetAmount,
+      required this.loading});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class PopoupBox extends StatelessWidget {
                 name: 'ADD NEW TASK',
                 onSave: onSave,
                 buttonColor: Theme.of(context).primaryColorDark,
-                loading: false,
+                loading: loading,
               )
             ],
           ),
