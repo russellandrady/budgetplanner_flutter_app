@@ -106,11 +106,14 @@ class _BudgetsState extends State<Budgets> {
               },
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNewBudget,
-        backgroundColor: Theme.of(context).primaryColorLight,
-        shape: const CircleBorder(eccentricity: BorderSide.strokeAlignCenter),
-        child: const Icon(Icons.add),
+      floatingActionButton: Opacity(
+        opacity: 0.8,
+        child: FloatingActionButton(
+          onPressed: createNewBudget,
+          backgroundColor: Theme.of(context).primaryColorLight,
+          shape: const CircleBorder(eccentricity: BorderSide.strokeAlignCenter),
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
