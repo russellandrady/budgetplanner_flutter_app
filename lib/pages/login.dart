@@ -78,8 +78,8 @@ class _LoginState extends State<Login> {
                       loading = true;
                     });
                     await AuthService().signin(
-                        email: _emailController.text,
-                        password: _passwordController.text,
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim(),
                         context: context);
                     setState(() {
                       loading = false;

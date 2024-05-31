@@ -77,8 +77,8 @@ class _RegisterState extends State<Register> {
                     });
                     await AuthService().signup(
                         context: context,
-                        email: _emailController.text,
-                        password: _passwordController.text);
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim());
                     setState(() {
                       loading = false;
                     });

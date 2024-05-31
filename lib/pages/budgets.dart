@@ -19,12 +19,8 @@ class _BudgetsState extends State<Budgets> {
   bool loadingPop = false;
   @override
   void initState() {
-    
     super.initState();
     loadBudgets();
-    setState(() {
-      loading = false;
-    });
   }
 
   final _budgetName = TextEditingController();
@@ -37,6 +33,7 @@ class _BudgetsState extends State<Budgets> {
     // Now you have the fetched budgets, you can assign them to budgetList or use them as needed
     setState(() {
       budgetList = fetchedBudgets;
+      loading = false;
     });
   }
 
@@ -85,7 +82,7 @@ class _BudgetsState extends State<Budgets> {
       body: loading
           ? const FakeTileBuilder()
           : ListView.builder(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               itemCount: budgetList.length +
                   1, // Increase itemCount by 1 to add the total tile
               itemBuilder: (context, index) {
