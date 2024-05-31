@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 class TextfieldsRegular extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final fieldController;
   final String textHint;
   final Color fieldColor;
