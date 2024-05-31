@@ -5,30 +5,22 @@ import 'package:budgetplanner/utils/fake_tile_builder.dart';
 import 'package:budgetplanner/utils/left_menu.dart';
 import 'package:budgetplanner/utils/popoup_box.dart';
 import 'package:budgetplanner/utils/total_tile.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:shimmer/shimmer.dart';
 
 class Budgets extends StatefulWidget {
-  Budgets({super.key});
+  const Budgets({super.key});
 
   @override
   State<Budgets> createState() => _BudgetsState();
 }
 
 class _BudgetsState extends State<Budgets> {
-  bool loading = false;
+  bool loading = true;
   bool loadingPop = false;
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
-    setState(() {
-      loading = true;
-    });
     loadBudgets();
     setState(() {
       loading = false;
@@ -91,7 +83,7 @@ class _BudgetsState extends State<Budgets> {
       ),
       drawer: const LeftMenu(),
       body: loading
-          ? FakeTileBuilder()
+          ? const FakeTileBuilder()
           : ListView.builder(
               padding: EdgeInsets.all(8.0),
               itemCount: budgetList.length +

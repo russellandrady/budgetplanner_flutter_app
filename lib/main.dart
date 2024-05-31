@@ -22,16 +22,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home:
-          FirebaseAuth.instance.currentUser != null ? Budgets() : WelcomePage(),
+          FirebaseAuth.instance.currentUser != null ? const Budgets() : const WelcomePage(),
       theme: ThemeData(
-          primaryColor: Color(0xFF499F68),
-          primaryColorLight: Color(0xFFE7E7E7),
-          primaryColorDark: Color(0xFFF2D0A9),
+          primaryColor: const Color(0xFF499F68),
+          primaryColorLight: const Color(0xFFE7E7E7),
+          primaryColorDark: const Color(0xFFF2D0A9),
           highlightColor: Colors.white),
       routes: {
-        '/login': (context) => Login(),
-        '/register': (context) => Register(),
-        '/budgets': (context) => Budgets()
+        '/login': (context) => const Login(),
+        '/register': (context) => const Register(),
+        '/budgets': (context) => const Budgets()
       },
     );
   }

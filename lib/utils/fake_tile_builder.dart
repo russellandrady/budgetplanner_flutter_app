@@ -8,13 +8,13 @@ class FakeTileBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       itemCount: 3,
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
           baseColor: Theme.of(context).primaryColorLight,
           highlightColor: Theme.of(context).primaryColor,
-          period: Duration(milliseconds: 1500), // Customize duration
+          period: const Duration(milliseconds: 1500), // Customize duration
           direction: ShimmerDirection.rtl,
           child: BudgetTile(
             budgetName: "",

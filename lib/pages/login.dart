@@ -6,7 +6,7 @@ import 'package:budgetplanner/utils/textfields_regular.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  Login({super.key});
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -22,8 +22,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(showLogoutuButton: false),
-      drawer: LeftMenu(),
+      appBar: const CustomAppbar(showLogoutuButton: false),
+      drawer: const LeftMenu(),
       body: Center(
         child: Container(
           height: 400.0,
@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
               // ],
               ),
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

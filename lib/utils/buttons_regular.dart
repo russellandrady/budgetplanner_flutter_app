@@ -1,13 +1,13 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 
 class ButtonsRegular extends StatelessWidget {
   final VoidCallback onSave;
   final String name;
   final Color buttonColor;
   final bool loading;
-  ButtonsRegular(
+  const ButtonsRegular(
       {super.key,
       required this.name,
       required this.onSave,
@@ -25,7 +25,7 @@ class ButtonsRegular extends StatelessWidget {
           color: buttonColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              side: BorderSide(width: 2.0),
+              side: const BorderSide(width: 2.0),
               borderRadius: BorderRadius.circular(15)),
           child: !loading
               ? Text(

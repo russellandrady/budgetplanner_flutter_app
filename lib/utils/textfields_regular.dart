@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class TextfieldsRegular extends StatelessWidget {
@@ -6,7 +6,7 @@ class TextfieldsRegular extends StatelessWidget {
   final String textHint;
   final Color fieldColor;
   final bool hideText;
-  TextfieldsRegular(
+  const TextfieldsRegular(
       {super.key,
       required this.fieldController,
       required this.textHint,

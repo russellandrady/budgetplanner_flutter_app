@@ -6,7 +6,7 @@ import 'package:budgetplanner/utils/textfields_regular.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
-  Register({super.key});
+  const Register({super.key});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -22,8 +22,8 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(showLogoutuButton: false),
-      drawer: LeftMenu(),
+      appBar: const CustomAppbar(showLogoutuButton: false),
+      drawer: const LeftMenu(),
       body: Center(
         child: Container(
           height: 400.0,
@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
             // ],
           ),
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

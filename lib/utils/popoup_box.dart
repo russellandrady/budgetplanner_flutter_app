@@ -3,6 +3,7 @@ import 'package:budgetplanner/utils/textfields_regular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+// ignore: must_be_immutable
 class PopoupBox extends StatelessWidget {
   final budgetName;
   final budgetAmount;

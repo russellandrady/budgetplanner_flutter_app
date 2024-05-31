@@ -1,7 +1,8 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+// ignore: must_be_immutable
 class BudgetTile extends StatelessWidget {
   String budgetName;
   int budgetAmount;
@@ -18,7 +19,7 @@ class BudgetTile extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8, bottom: 8),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: StretchMotion(),
+          motion: const StretchMotion(),
           children: [
             SlidableAction(
               onPressed: onDelete,

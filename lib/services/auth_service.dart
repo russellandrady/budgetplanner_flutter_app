@@ -1,8 +1,7 @@
-import 'package:budgetplanner/pages/budgets.dart';
+
 import 'package:budgetplanner/utils/toast_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthService {
