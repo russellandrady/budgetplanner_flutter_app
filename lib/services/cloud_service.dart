@@ -118,4 +118,27 @@ class FireStoreService {
       ToastAlert().toastAlert(message: "User is Not Authenticated!");
     }
   }
+  Future<void> updateBudget(String budgetId, String budgetName, int budgetAmount) async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    DocumentReference budgetRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .collection('budgets')
+        .doc(budgetId);
+
+    try {
+      await budgetRef.update({
+        'name': budgetName,
+        'value': budgetAmount,
+      });
+      ToastAlert().toastAlert(message: "Updated successfully!");
+    } catch (e) {
+      ToastAlert().toastAlert(message: "Error updating budget: $e");
+    }
+  } else {
+    ToastAlert().toastAlert(message: "User is Not Authenticated!");
+  }
+}
+
 }

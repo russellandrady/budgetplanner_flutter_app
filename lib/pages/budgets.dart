@@ -17,11 +17,15 @@ class Budgets extends StatefulWidget {
 class _BudgetsState extends State<Budgets> {
   bool loading = true;
   bool loadingPop = false;
+
   @override
   void initState() {
     super.initState();
     loadBudgets();
   }
+
+  final budgetNameUpdate = TextEditingController();
+  final budgetAmountUpdate = TextEditingController();
 
   final _budgetName = TextEditingController();
   final _budgetAmount = TextEditingController();
@@ -64,6 +68,7 @@ class _BudgetsState extends State<Budgets> {
               });
             },
             loading: loadingPop,
+            name: "ADD",
           );
         });
   }
@@ -101,6 +106,19 @@ class _BudgetsState extends State<Budgets> {
                       loadBudgets();
                       // budgetList.removeAt(index);
                     },
+                    budgetNameUpdate: budgetNameUpdate,
+                    budgetAmountUpdate: budgetAmountUpdate,
+                    onUpdate: () {
+                      FireStoreService().updateBudget(
+                          budgetList[index][0],
+                          budgetNameUpdate.text,
+                          int.parse(budgetAmountUpdate.text));
+                      loadBudgets();
+                      budgetNameUpdate.clear();
+                      budgetAmountUpdate.clear();
+                      Navigator.pop(context);
+                    },
+                    name: "UPDATE",
                   );
                 }
               },

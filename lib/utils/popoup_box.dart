@@ -10,13 +10,15 @@ class PopoupBox extends StatelessWidget {
   final budgetAmount;
   // ignore: prefer_typing_uninitialized_variables
   final loading;
+  final name;
   VoidCallback onSave;
   PopoupBox(
       {super.key,
       required this.onSave,
       required this.budgetName,
       required this.budgetAmount,
-      required this.loading});
+      required this.loading,
+      required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class PopoupBox extends StatelessWidget {
                   fieldColor: Colors.black,
                   hideText: false),
               ButtonsRegular(
-                name: 'ADD',
+                name: name,
                 onSave: onSave,
                 buttonColor: Theme.of(context).primaryColorDark,
                 loading: loading,

@@ -20,6 +20,12 @@ class FakeTileBuilder extends StatelessWidget {
             budgetName: "",
             budgetAmount: 0,
             onDelete: (context) {},
+            budgetAmountUpdate: TextEditingController(),
+            budgetNameUpdate: TextEditingController(),
+            onUpdate: () {
+              
+            },
+            name: "",
           ),
         );
       },
