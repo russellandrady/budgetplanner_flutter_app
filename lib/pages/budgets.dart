@@ -123,7 +123,8 @@ class _BudgetsState extends State<Budgets> {
                 }
               },
             ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Opacity(
         opacity: 0.8,
         child: FloatingActionButton(
